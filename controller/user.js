@@ -12,6 +12,11 @@ exports.getAlluser = async (req,res)=>{
     res.json(user);
 }
 
+exports.searchUser = async (req,res)=>{
+    const user = await User.find({name: req.query.name});
+    res.json(user);
+}
+
 exports.getUserbyCity = async (req,res)=>{
     const user = await User.find({address: req.query.address});
     res.json(user);
