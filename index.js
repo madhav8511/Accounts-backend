@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const userRouter = require('./routes/user');
 const transRouter = require('./routes/transaction');
+const cityRouter = require('./routes/city');
 
 main().catch(err => console.log(err));
 async function main() {
@@ -25,6 +26,7 @@ server.get('/',(req,res)=>{
 
 server.use('/user',userRouter.router);
 server.use('/trans',transRouter.router);
+server.use('/city',cityRouter.router);
 
 server.listen(8080 ,()=>{
     console.log('Server Start');
