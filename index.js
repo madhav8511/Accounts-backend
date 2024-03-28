@@ -2,13 +2,14 @@ const mongoose = require('mongoose');
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
+require('dotenv').config();
 const userRouter = require('./routes/user');
 const transRouter = require('./routes/transaction');
 const cityRouter = require('./routes/city');
 
 main().catch(err => console.log(err));
 async function main() {
-  await mongoose.connect('mongodb://127.0.0.1:27017/Account');
+  await mongoose.connect(`${process.env.LOCAL_DATABASE}`);
   console.log('Database Connected');
 }
 
