@@ -9,7 +9,8 @@ const notesSchema = new Schema({
     amount: {type: Number,required: true},
     description: {type: String, required: true},
     type: {type: String, require: true},
-    date: {type: Date, default: Date.now}
+    date: {type: Date, default: Date.now},
+    images: [String]
   });
 
 exports.Transaction = mongoose.model('Transaction', notesSchema);

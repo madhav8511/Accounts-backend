@@ -6,15 +6,28 @@ exports.getAlltransaction = async (req,res)=>{
     res.json(trans);
 }
 
-exports.createTransaction = async (req,res)=>{
-    const trans = new Transaction({user: req.user.id});
-
-    trans.amount = req.body.amount;
-    trans.description = req.body.description;
-    trans.type = req.body.type;
-
-    await trans.save();
+exports.getTransaction = async (req,res)=>{
+    const trans = await Transaction.findById(req.params.id);
     res.json(trans);
+}
+
+exports.createTransaction = async (req,res)=>{
+    try {
+        const { amount, description, type, img } = req.body;
+        const trans = new Transaction({
+            user: req.user.id,
+            amount,
+            description,
+            type,
+            images: img
+        });
+
+        await trans.save();
+        res.json(trans);
+    } catch (error) {
+        console.error('Error creating transaction:', error);
+        res.status(500).json({ error: 'Server error' });
+    }
 }
 
 exports.getTransactionbyUser = async (req, res) => {
