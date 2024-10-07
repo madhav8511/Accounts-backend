@@ -7,6 +7,7 @@ const userRouter = require('./routes/user');
 const transRouter = require('./routes/transaction');
 const cityRouter = require('./routes/city');
 const imageRouter = require('./routes/image');
+const billRouter = require('./routes/bill');
 
 main().catch(err => console.log(err));
 async function main() {
@@ -30,6 +31,7 @@ server.use('/user',userRouter.router);
 server.use('/trans',transRouter.router);
 server.use('/city',cityRouter.router);
 server.use('/uploads',imageRouter.router);
+server.use('/bill',billRouter.router);
 
 server.listen(8080 ,()=>{
     console.log('Server Start');
