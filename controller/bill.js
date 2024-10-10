@@ -22,12 +22,19 @@ exports.addProduct = async(req,res)=>{
 
 exports.updateProduct = async(req,res)=>{
     const { name, price, quantity } = req.body;
+    const id = req.params.id;
 
-    const updatedProduct = await Bill.findOneAndUpdate(
-    { name: name },
-    { price: price, quantity: quantity },
-    { new: true } 
-    );
+    // const updatedProduct = await Bill.findOneAndUpdate(
+    // { name: name },
+    // { price: price, quantity: quantity },
+    // { new: true } 
+    // );
+
+    const updatedProduct = await Bill.findByIdAndUpdate(
+        id,
+        { name: name, price: price, quantity: quantity },
+        { new: true } 
+    )
 
     res.json(updatedProduct);
 }

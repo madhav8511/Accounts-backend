@@ -30,6 +30,19 @@ exports.createTransaction = async (req,res)=>{
     }
 }
 
+exports.upadateTransaction = async(req,res)=>{
+    const {amount,description,type,date} = req.body;
+    const id = req.params.id;
+
+    const updated_transaction = await Transaction.findByIdAndUpdate(
+        id,
+        {amount: amount, description: description, type: type,date: date},
+        {new: true}
+    )
+
+    res.json(updated_transaction);
+}
+
 exports.getTransactionbyUser = async (req, res) => {
     try {
         const trans = await Transaction.find({ user: req.user.id });

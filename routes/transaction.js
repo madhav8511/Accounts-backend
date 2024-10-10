@@ -8,6 +8,7 @@ const fetchuser = decode.fetchUser;
 router
     .get('/',userController.getAlltransaction)
     .get('/gettrans/:id',userController.getTransaction)
+    .put('/updatetransaction/:id',userController.upadateTransaction)
     .post('/createTransaction',fetchuser,userController.createTransaction)
     .get('/getbyUser',fetchuser,userController.getTransactionbyUser)
     .delete('/deletetrans/:id',userController.deleteTransactionbyUser);

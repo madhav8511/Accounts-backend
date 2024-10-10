@@ -8,6 +8,7 @@ const transRouter = require('./routes/transaction');
 const cityRouter = require('./routes/city');
 const imageRouter = require('./routes/image');
 const billRouter = require('./routes/bill');
+const smsrouter = require('./routes/sms');
 
 main().catch(err => console.log(err));
 async function main() {
@@ -32,6 +33,7 @@ server.use('/trans',transRouter.router);
 server.use('/city',cityRouter.router);
 server.use('/uploads',imageRouter.router);
 server.use('/bill',billRouter.router);
+server.use('/sms',smsrouter.router);
 
 server.listen(8080 ,()=>{
     console.log('Server Start');
