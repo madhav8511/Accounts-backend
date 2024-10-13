@@ -70,4 +70,33 @@ router.post("/images", upload.array("billimage", 3), async (req, res) => {
     }
 });
 
+function getPublicIdFromUrl(imageUrl) {
+  const parts = imageUrl.split('/');
+  const uploadIndex = parts.indexOf('upload');
+  
+  // Extract everything after the 'upload/' part, ignoring the version number (if any)
+  const publicIdWithExtension = parts.slice(uploadIndex + 2).join('/'); // Skip the 'upload' and the version part
+  const publicId = publicIdWithExtension.split('.')[0]; // Remove file extension
+  return publicId;
+}
+
+router.delete('/deleteimage', async (req, res) => {
+    const {imageUrls} = req.body;
+  
+    try {
+      // Step 1: Delete images from Cloudinary
+      const deletePromises = imageUrls.map((url) => {
+        const publicId = getPublicIdFromUrl(url);
+        return cloudinary.uploader.destroy(publicId);
+      });
+  
+      // Wait for all the images to be deleted
+      const deleteResults = await Promise.all(deletePromises);
+      console.log('Images deleted:', deleteResults);
+    }
+    catch{
+        console.log("Error in deleting file's");
+    }
+});
+
 exports.router = router;
