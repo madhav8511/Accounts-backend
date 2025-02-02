@@ -59,7 +59,7 @@ exports.getTransactionbyUser = async (req, res) => {
         }
 
         // Calculate balance
-        let balance = credit - debit;
+        let balance = debit - credit;
 
         // Prepare the response object
         const responseData = {
